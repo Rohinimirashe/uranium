@@ -23,7 +23,7 @@ const internSchema = new mongoose.Schema(
             unique: true
         },
         isDeleted:{ 
-            type:boolean,
+            type:Boolean,
              default: false
             }
     

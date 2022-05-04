@@ -29,7 +29,7 @@ const collegeSchema = new mongoose.Schema(
             type: String,
             required: true,
         }, 
-        loginLink: {
+        logoLink: {
             type: String,
             required: true
           
