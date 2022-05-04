@@ -3,6 +3,22 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 //{ name: {mandatory}, email: {mandatory, valid email, unique}, mobile: {mandatory, valid mobile number, unique}, collegeId: {ObjectId, ref to college model, isDeleted: {boolean, default: false}}
 
 //*--------Intern MODEL----------------
+
+//**MOBILE NUMBER VALIDATION */
+// function phonenumber(inputtxt)
+// {
+//   var phoneno = /^\d{10}$/;
+//   if((inputtxt.value.match(phoneno))
+//         {
+//       return true;
+//         }
+//       else
+//         {
+//         alert("message");
+//         return false;
+//         }
+// }
+
 const internSchema = new mongoose.Schema(
     {
         name: {
@@ -34,26 +50,3 @@ const internSchema = new mongoose.Schema(
 module.exports = mongoose.model('intern', internSchema)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// { fname: { mandatory}, lname: {mandatory},
-//  title: {mandatory, enum[Mr, Mrs, Miss]},
-//  email: {mandatory, valid email, unique}, password: {mandatory} }
-// validate: [validateEmail, 'Please fill a valid email address'],
-// match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']

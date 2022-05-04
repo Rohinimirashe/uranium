@@ -27,7 +27,7 @@ const createCollege= async function (req, res) {
     const name = req.body.name;
     const fullName = req.body.fullName;
     const logoLink = req.body.logoLink;
-    const isDeleted = req.body.isDeleted;
+    // const isDeleted = req.body.isDeleted;
     
 
 //*Body Validation
@@ -47,8 +47,7 @@ const createCollege= async function (req, res) {
     }
 
 
-
-    //*Get College Details
+//=================*Get College Details===============
 
 const GetCollegeDetails = async function (req, res) {
   try {
@@ -57,19 +56,43 @@ const GetCollegeDetails = async function (req, res) {
     let collegeName = req.query.collegeName;
 
     const college = await collegeModel.findOne({name:collegeName })
+// console.log(college)
+    // "name": "xyz",
+    // "fullName": "Some Institute of Engineering and Technology",
+    // "logoLink": "some public s3 link for a college logo",
+    // "interests"
 
     let allData = await internModel
       .find({
         isDeleted: false,collegeId: college._id
-      })
-      
-      college.interests= allData
+      }).select({_id:1,name:1,email:1,mobile:1})
 
+
+      
+      // "_id": "123a47301a53ecaeea02be59",
+      // "name": "Jane Doe",
+      // "email": "jane.doe@miet.ac.in",
+      // "mobile": "8888888888"
+
+      // console.log(allData)
+    //  res.body.msg.interests= allData(doubt 1)
+    // college.interests= allData(doubt 2)
+    
+    for (let i=0 ; i<allData.length;i++) {
+      college.interests.push(allData[i])
+    }
+   
+
+    // const newCollegeData = await collegeModel.findOne({name:collegeName})
+    //  console.log(newCollegeData)
+//**Why iam not able to update an db entry only the response is changed */
     //*Validation
 
     // if (allData.length == 0)
     //   return res.status(404).send({ msg: "Enter valid Details in query" });
+
     res.status(200).send({ status: true, msg: college });
+   
 
 
   } catch (err) {

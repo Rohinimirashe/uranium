@@ -37,7 +37,8 @@ const collegeSchema = new mongoose.Schema(
         isDeleted: {
             default:false,
             type:Boolean,
-        }
+        },
+interests :[]
 
 } ,{timestamps:true})
 
