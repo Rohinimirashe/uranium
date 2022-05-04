@@ -5,18 +5,49 @@ const blogModel = require("../models/blogModel");
 const isValid = mongoose.Types.ObjectId.isValid;
 
 //*Create Blog
-const createBlog = async function (req, res) {
-  try {
-    //*Empty Body Validation
-    const data = req.body;
-    if (Object.keys(data).length == 0) {
-      return res
-        .status(400)
-        .send({
-          status: false,
-          msg: "Invalid request, Please provide blog details",
-        });
+// const createBlog = async function (req, res) {
+//   try {
+//     //*Empty Body Validation
+//     const data = req.body;
+//     if (Object.keys(data).length == 0) {
+//       return res
+//         .status(400)
+//         .send({
+//           status: false,
+//           msg: "Invalid request, Please provide blog details",
+//         });
+//     }
+const createCollege= async function (req, res) {
+  try{
+
+//*Empty body validation
+
+    const data = req.body
+    if(Object.keys(data).length == 0){
+      return res.status(400).send({status: false,msg: "Invalid request, Please provide College details",
+      });
     }
+
+//*Extracts data from body
+
+    const name = req.body.name;
+    const fullName = req.body.fullName;
+    const loginLink = req.body.loginLink;
+    const isDeleted = req.body.isDeleted;
+    
+
+//*Params Validation
+
+    if (!name) return res.status(400).send({ status: false, msg: "Firstname is required" })
+    if (!fullName) return res.status(400).send({ status: false, msg: "fullNname is required" })
+    if (!loginLink) return res.status(400).send({ status: false, msg: "loginLink is required" })
+    if (!isDeleted) return res.status(400).send({ status: false, msg: "isDeleted is required" })
+  } catch (err) {
+    res.status(500).send({ msg: "server error", error: err.message });
+    }
+    }
+    
+    
 
     let authorId = req.body.authorId;
     if (!authorId)
